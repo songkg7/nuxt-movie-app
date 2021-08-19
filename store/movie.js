@@ -17,7 +17,7 @@ export default {
 
   mutations: {
     updateState(state, payload) {
-      Object.keys(payload).forEach((key) => {
+      Object.keys(payload).forEach(key => {
         state[key] = payload[key]
       })
     },
@@ -105,5 +105,8 @@ export default {
 }
 
 async function _fetchMovie(payload) {
-  return await axios.post('/.netlify/functions/movie', payload)
+  const url = process.client
+    ? '/api/movie'
+    : `${process.env.CLIENT_URL}/api/movie`
+  return await axios.post(url, payload)
 }

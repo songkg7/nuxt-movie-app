@@ -40,7 +40,7 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/dotenv'],
 
   styleResources: {
     scss: ['~/scss/main.scss'],
@@ -58,7 +58,7 @@ export default {
   },
   serverMiddleware: [
     {
-      path: '/.netlify/functions/movie',
+      path: '/api/movie',
       handler: '~/server-middleware/movie.js',
     },
   ],

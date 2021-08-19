@@ -83,18 +83,16 @@ export default {
   components: {
     Loader,
   },
-  data() {
+  async asyncData({ store, params }) {
+    await store.dispatch('movie/searchMovieWithId', {
+      id: params.id,
+    })
     return {
       imageLoading: true,
     }
   },
   computed: {
     ...mapState('movie', ['loading', 'theMovie']),
-  },
-  created() {
-    this.$store.dispatch('movie/searchMovieWithId', {
-      id: this.$route.params.id,
-    })
   },
   methods: {
     requestDiffSizeImage(url, size = 700) {
@@ -115,6 +113,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .container {
   padding-top: 40px;
 }
@@ -125,7 +124,7 @@ export default {
   .poster {
     flex-shrink: 0;
     width: 500px;
-    height: 500px * 3/2;
+    height: (500px * 3 / 2);
     margin-right: 70px;
   }
 
@@ -168,7 +167,7 @@ export default {
 
   .poster {
     width: 500px;
-    height: 500px * 3/2;
+    height: (500px * 3 / 2);
     margin-right: 70px;
     border-radius: 10px;
     background-color: $gray-200;
@@ -237,7 +236,7 @@ export default {
   @include media-breakpoint-down(xl) {
     .poster {
       width: 300px;
-      height: 300px * 3/2;
+      height: (300px * 3 / 2);
       margin-right: 40px;
     }
   }
