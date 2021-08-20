@@ -109,6 +109,40 @@ export default {
       return src
     },
   },
+  head() {
+    return {
+      meta: [
+        { charset: 'utf-8' },
+        { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: '' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { hid: 'og:type', property: 'og:type', content: 'website' },
+        {
+          hid: 'og:site_name',
+          property: 'og:site_name',
+          content: 'Nuxt Movie App',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: this.theMovie.Title,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.theMovie.Plot,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content:
+            this.theMovie.Poster,
+        },
+        { hid: 'og:url', property: 'og:url', content: `${process.env.CLIENT_URL}${this.$route.fullPath}` },
+      ]
+    }
+  },
 }
 </script>
 

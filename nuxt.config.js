@@ -11,6 +11,29 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'Nuxt Movie App',
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'Nuxt Movie App / Search',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'The OMDb api',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content:
+          'https://raw.githubusercontent.com/songkg7/omdb-api-app/master/src/assets/logo.png',
+      },
+      { hid: 'og:url', property: 'og:url', content: process.env.CLIENT_URL },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

@@ -1,12 +1,8 @@
 <template>
   <div class="about">
     <div class="photo">
-      <Loader
-        v-if="imageLoading"
-        absolute />
-      <img
-        :src="image"
-        :alt="name" />
+      <Loader v-if="imageLoading" absolute />
+      <img :src="image" :alt="name" />
     </div>
     <div class="name">
       {{ name }}
@@ -23,21 +19,15 @@ import Loader from '~/components/Loader'
 
 export default {
   components: {
-    Loader
+    Loader,
   },
   data() {
     return {
-      imageLoading: true
+      imageLoading: true,
     }
   },
   computed: {
-    ...mapState('about', [
-      'name',
-      'email',
-      'blog',
-      'phone',
-      'image'
-    ])
+    ...mapState('about', ['name', 'email', 'blog', 'phone', 'image']),
   },
   mounted() {
     this.init()
@@ -46,14 +36,52 @@ export default {
     async init() {
       await this.$loadImage(this.image)
       this.imageLoading = false
+    },
+  },
+  head() {
+    return {
+      meta: [
+        { charset: 'utf-8' },
+        { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: '' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { hid: 'og:type', property: 'og:type', content: 'website' },
+        {
+          hid: 'og:site_name',
+          property: 'og:site_name',
+          content: 'Nuxt Movie App',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: this.name,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.email,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.image,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `${process.env.CLIENT_URL}${this.$route.fullPath}`,
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .about {
   text-align: center;
+
   .photo {
     width: 250px;
     height: 250px;
@@ -64,13 +92,15 @@ export default {
     box-sizing: border-box;
     background-color: $gray-200;
     position: relative;
+
     img {
       width: 100%;
     }
   }
+
   .name {
     font-size: 40px;
-    font-family: "Oswald", sans-serif;
+    font-family: 'Oswald', sans-serif;
     margin-bottom: 20px;
   }
 }
